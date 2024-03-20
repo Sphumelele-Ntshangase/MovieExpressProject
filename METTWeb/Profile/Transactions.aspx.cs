@@ -41,7 +41,6 @@ namespace MEWeb.Profile
 
     public decimal Price { get; set; }
     public decimal Balance { get; set; }
-    public bool IsActiveInd { get; set; }  
       
     public String MovieTitle { get; set; }
     
