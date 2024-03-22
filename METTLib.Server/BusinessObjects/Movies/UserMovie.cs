@@ -287,9 +287,9 @@ namespace MELib.Movies
 
       cm.Parameters.AddWithValue("@MovieID", GetProperty(MovieIDProperty));
       cm.Parameters.AddWithValue("@UserID", GetProperty(UserIDProperty));
-      cm.Parameters.AddWithValue("@MovieTitle", Singular.Misc.NothingDBNull(MovieTitle));
-      cm.Parameters.AddWithValue("@MovieDescription", Singular.Misc.NothingDBNull(MovieDescription));
-      cm.Parameters.AddWithValue("@MovieImageURL", Singular.Misc.NothingDBNull(MovieImageURL));
+      //cm.Parameters.AddWithValue("@MovieTitle", Singular.Misc.NothingDBNull(MovieTitle));
+      //cm.Parameters.AddWithValue("@MovieDescription", Singular.Misc.NothingDBNull(MovieDescription));
+      //cm.Parameters.AddWithValue("@MovieImageURL", Singular.Misc.NothingDBNull(MovieImageURL));
       cm.Parameters.AddWithValue("@WatchedDate", Singular.Misc.NothingDBNull(WatchedDate));
       cm.Parameters.AddWithValue("@IsActiveInd", GetProperty(IsActiveIndProperty));
       cm.Parameters.AddWithValue("@DeletedDate", Singular.Misc.NothingDBNull(DeletedDate));

@@ -151,7 +151,7 @@ namespace MEWeb.Movies
 
           if (SavedUserMoviesSaveHelper.Success)
           {
-            sr.Data = SavedUserMovies;
+            sr.Data = UserMovieList.GetUserMovieList();
             sr.Success = true;
           }
           else

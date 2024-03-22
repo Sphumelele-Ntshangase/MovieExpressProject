@@ -101,7 +101,6 @@
                               MovieTitleContentDiv.Helpers.LabelFor(c => ViewModel.MovieTitle);
                               var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => ViewModel.MovieTitle);
                               MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
-                              MovieTitleEditor.AddBinding(Singular.Web.KnockoutBindingString.id, "MovieTitle");
                             }
                           }
                           var MovieGenreContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
@@ -109,12 +108,11 @@
                             MovieGenreContentDiv.Helpers.LabelFor(c => ViewModel.MovieGenreID);
                             var ReleaseFromDateEditor = MovieGenreContentDiv.Helpers.EditorFor(c => ViewModel.MovieGenreID);
                             ReleaseFromDateEditor.AddClass("form-control marginBottom20 filterBox");
-
-                            var FilterBtn = MovieGenreContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                            {
-                              FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovies($data)");
-                              FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
-                            }
+                          }
+                          var FilterBtn = RowContentDiv1.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                          {
+                            FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovies($data)");
+                            FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
                           }
                         }
                       }
@@ -184,11 +182,20 @@
 
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to add this item?", 'center',
         function () { // Yes
-
-          // ADDING price of purchased items
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
-          ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
-          var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
+          ViewModel.CallServerMethod('AddMovie', { MovieID: obj.MovieID(), ShowLoadingBar: true }, function (result) {
+            if (result.Success) {
+              ViewModel.UserMovieList.Set(result.Data);
+              MEHelpers.Notification("Item added successfully.", 'center', 'success', 5000);
+            }
+            else {
+              MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+            }
+          })
+        },
+        function () { // No
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+          ViewModel.UserAccount().TotalPurchased(totalPrice);
+          var jsonBalance = ViewModel.UserAccount().Serialise();
 
           ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
             if (result.Success) {
@@ -199,19 +206,23 @@
             }
 
           });
+        }
+      )
 
-          ViewModel.CallServerMethod('AddMovie', { MovieID: obj.MovieID(), ShowLoadingBar: true }, function (result) {
-            if (result.Success) {
-              ViewModel.UserMovieList.Set(result.Data);
-              MEHelpers.Notification("Item added successfully.", 'center', 'success', 5000);
-            }
-            else {
-              MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-            }
-          })         
-        },
-        function () { // No
-        })
+      // ADDING price of purchased items
+      var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
+      ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
+      var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
+
+      ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+        if (result.Success) {
+          ViewModel.UserAccount.Set(result.Data);
+        }
+        else {
+          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+        }
+
+      });
     };
 
     var Navigate = function () {

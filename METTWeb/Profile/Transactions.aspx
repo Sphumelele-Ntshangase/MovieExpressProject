@@ -58,7 +58,7 @@
                             LeftColContentDiv.Helpers.HTML("<b>NOTICE: </b>Clicking <b>Remove</b>, deletes the movie from the list.");
                             LeftColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true);
                             //create a table using bootstrap
-                            var PurchaseTable = LeftColContentDiv.Helpers.BootstrapTableFor<MELib.Movies.UserMovie>((c) => c.UserMovieList, false, true, "");
+                            var PurchaseTable = LeftColContentDiv.Helpers.BootstrapTableFor<MELib.Movies.UserMovie>((c) => c.UserMovieList, false, false, "");
                             var FirstRow = PurchaseTable.FirstRow;
                             {
                               var MovieTitle = FirstRow.AddColumn("Title");
@@ -83,6 +83,7 @@
                                 deleteButton.Tooltip = "Remove from purchases";
                               }
                             }
+                            //LeftColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.value, a => a.Movie.Price);
                           }
                         }
                       }
@@ -225,6 +226,7 @@
 
         ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
           if (result.Success) {
+            ViewModel.UserMovieList.Set(result.Data);
             ViewModel.UserAccount.Set(result.Data);
             alert("Total purchase has been deducted");
             window.location = '../Profile/DepositFunds.aspx';
@@ -233,7 +235,6 @@
             MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
           }
         });
-        // window.location = '../Profile/DepositFunds.aspx';
       }
       else {
         MEHelpers.Notification("Total purchase is more than the account balance you have", 'center', 'warning', 5000);
@@ -246,12 +247,17 @@
 
     var DeleteMovie = function (obj) {
       console.log(obj.MovieID());
-      
+
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to delete this item?", 'center',
         function () { // Yes
-          ViewModel.CallServerMethod('DeleteMovie', { MovieID: obj.MovieID(), ShowLoadingBar: true }, function (result) {
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+          ViewModel.UserAccount().TotalPurchased(totalPrice);
+          var jsonBalance = ViewModel.UserAccount().Serialise();
+
+          ViewModel.CallServerMethod('DeleteMovie', { MovieID: obj.MovieID(), Account: jsonBalance, ShowLoadingBar: true }, function (result) {
             if (result.Success) {
-              // ViewModel.UserMovieList().IsActiveInd = false;
+              ViewModel.UserMovieList.Set(result.Data);
+              ViewModel.UserAccount.Set(result.Data);
               MEHelpers.Notification("Item deleted successfully.", 'center', 'success', 5000);
             }
             else {

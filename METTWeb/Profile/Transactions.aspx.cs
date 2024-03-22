@@ -67,12 +67,6 @@ namespace MEWeb.Profile
         FoundUserMoviesInd = false;
       }
 
-      //MovieStatus = MELib.Movies.UserMovieList.GetUserMovieList().FirstOrDefault(c => c.MovieID == MovieID);
-      //if (MovieStatus.IsActiveInd)
-      //{
-      //  UserMovieList.GetUserMovieList().Remove(MovieStatus);
-      //}
-
     }
 
     [WebCallable]
@@ -87,7 +81,7 @@ namespace MEWeb.Profile
 
         if (SavedBalanceSaveHelper.Success)
         {
-          store.Data = SavedUserAccount;
+          store.Data = UserMovieList.GetUserMovieList(MovieID);
           store.Success = true;
         }
         else
@@ -104,27 +98,27 @@ namespace MEWeb.Profile
       return store;
     }
 
-    [WebCallable]
-    public Result FilterMovies(int MovieGenreID)
-    {
-      Result sr = new Result();
-      try
-      {
-        sr.Data = MELib.Movies.MovieList.GetMovieList(MovieGenreID);
-        sr.Success = true;
-      }
-      catch (Exception e)
-      {
-        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(int MovieGenreID, ({MovieGenreID})");
-        sr.Data = e.InnerException;
-        sr.ErrorText = "Could not filter movies by category.";
-        sr.Success = false;
-      }
-      return sr;
-    }
+    //[WebCallable]
+    //public Result FilterMovies(int MovieGenreID)
+    //{
+    //  Result sr = new Result();
+    //  try
+    //  {
+    //    sr.Data = MELib.Movies.MovieList.GetMovieList(MovieGenreID);
+    //    sr.Success = true;
+    //  }
+    //  catch (Exception e)
+    //  {
+    //    WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(int MovieGenreID, ({MovieGenreID})");
+    //    sr.Data = e.InnerException;
+    //    sr.ErrorText = "Could not filter movies by category.";
+    //    sr.Success = false;
+    //  }
+    //  return sr;
+    //}
 
     [WebCallable]
-    public static Result DeleteMovie(int MovieID)
+    public static Result DeleteMovie(int MovieID, UserAccount Account)
     {
       MEIdentity identity = MEWebSecurity.CurrentIdentity();
       Result sr = new Result();
@@ -134,8 +128,8 @@ namespace MEWeb.Profile
         UserMovieStatus.MovieID = MovieID;
         UserMovieStatus.UserID = identity.UserID;
         UserMovieStatus.IsActiveInd = false;
-
-        
+        UserMovieStatus.DeletedBy = identity.UserID;
+        UserMovieStatus.DeletedDate = DateTime.Now;
 
         if (UserMovieStatus != null && UserMovieStatus.IsValid)
         {
@@ -144,7 +138,7 @@ namespace MEWeb.Profile
 
           if (SavedMovieStatusSaveHelper.Success)
           {
-            sr.Data = SavedMovieStatus;
+            sr.Data = UserMovieList.GetUserMovieList();
             sr.Success = true;
           }
           else
