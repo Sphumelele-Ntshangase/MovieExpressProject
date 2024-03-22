@@ -172,7 +172,7 @@
                       {
                         var RowContentDiv2 = CheckoutContentDiv.Helpers.DivC("row");
                         {
-                          var BackToMoviesBtn = RowContentDiv2.Helpers.Button("Add More Movies", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                          var BackToMoviesBtn = RowContentDiv2.Helpers.Button("Add Movies", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                           {
                             BackToMoviesBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "BackToMovies()");
                             BackToMoviesBtn.AddClass("btn btn-primary btn-outline pull-left");
@@ -228,8 +228,9 @@
           if (result.Success) {
             ViewModel.UserMovieList.Set(result.Data);
             ViewModel.UserAccount.Set(result.Data);
-            alert("Total purchase has been deducted");
+            
             window.location = '../Profile/DepositFunds.aspx';
+            alert("Total purchase has been deducted");
           }
           else {
             MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
@@ -246,7 +247,7 @@
     }
 
     var DeleteMovie = function (obj) {
-      console.log(obj.MovieID());
+      //console.log(obj.MovieID());
 
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to delete this item?", 'center',
         function () { // Yes

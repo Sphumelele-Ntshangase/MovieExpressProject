@@ -53,7 +53,7 @@
                       {
                         var EditPicture = ContentDiv.Helpers.DivC("row");
                         {
-                          EditPicture.Helpers.HTML("<div class='addressCardO'><div class='circlecontaineruser circlecenter'><span class='fas fa-user fa-lg fa-fw' style='font-size:64px;'></span></div></div>");
+                          EditPicture.Helpers.HTML("<div class='circlecenter'><div class='circlecontaineruser circlecenter'><span class='fas fa-user fa-lg fa-fw' style='font-size:64px;'></span></div></div>");
                           var ChangePicBtn = EditPicture.Helpers.Button("Change Picture", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                           {
                             // Change Picture Button
@@ -96,12 +96,8 @@
                             {
                               //showing details
                               MidColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Name: " + c.UserAccount.UserName);
-                              // MidColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Name: " + c.EmailAdrress);
 
-                              var dialog = h.Dialog(
-                                c => c.EditingUser != null,
-                                c => (c.EditingUser != null) ? "New User" : "Edit User",
-                                "CancelEdit");
+                              var dialog = ChangeDetails.Helpers.Dialog(c => c.EditingUser != null, c => (c.EditingUser != null) ? "Edit Profile Details" : "Edit User", "CancelEdit");
                               {
                                 dialog.Style.Width = "600";
                                 //dialog.Style.PaddingAll("10");

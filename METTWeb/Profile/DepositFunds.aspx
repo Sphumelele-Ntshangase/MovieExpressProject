@@ -64,7 +64,8 @@
                         var LeftColContentDiv = AddingFunds.Helpers.DivC("col-md-12 marginBottom20");
                         {
                           //non-functional buttons for payment methods
-                          LeftColContentDiv.Helpers.HTML("<p><b>Payment Method: </b></p>");
+                          LeftColContentDiv.Helpers.HTML("<p>Payment Method:</p>");
+
                           var first = LeftColContentDiv.Helpers.Button("PayPal", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.paypal);
                           first.AddClass("btn btn-info btn-outline");
                           first.AddBinding(Singular.Web.KnockoutBindingString.click, "PayPal($data)");
@@ -77,23 +78,17 @@
                           third.AddClass("btn btn-info btn-outline");
                           third.AddBinding(Singular.Web.KnockoutBindingString.click, "MasterCard($data)");
 
-                          // Place Content Here
-                          var LabelAmount = LeftColContentDiv.Helpers.HTML("<p><b>Enter Amount:</b></p>");
-
+                          var LabelAmount = LeftColContentDiv.Helpers.HTML("<p>Enter Amount:</p>");
                           var createEditor = LeftColContentDiv.Helpers.DivC("row");
                           {
                             var editorSize = createEditor.Helpers.DivC("col-md-6");
                             {
-
                               var labelEditor = editorSize.Helpers.EditorFor(a => a.Balance, "");
                               {
                                 var EnteredAmount = labelEditor.AddClass("form-control marginBottom20 text-left");
                               }
-
                             }
-
                           }
-
                           var RightColContentDiv = AddingFunds.Helpers.DivC("col-md-12");
                           {
                             // Fund Account Button
@@ -141,21 +136,33 @@
                         var LeftColContentDiv = AddingFunds.Helpers.DivC("col-md-12 marginBottom20");
                         {
 
-                          LeftColContentDiv.Helpers.HTML("<p><b>Tickets Delivery Options:</b></p>");
-                          LeftColContentDiv.Helpers.HTML("<p><b>Collection:</b></p>");
+                          LeftColContentDiv.Helpers.HTML("<p><h4>Tickets Delivery Options:</h4></p>");
+                          LeftColContentDiv.Helpers.HTML("<p>Collection:</p>");
                           var dateBtn = LeftColContentDiv.Helpers.Button("Choose Date", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.calendar);
                           dateBtn.AddClass("btn btn-info btn-outline");
                           dateBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "ChooseDate()");
+
 
                         }
                         var MidColContentDiv = AddingFunds.Helpers.DivC("col-md-12 marginBottom20");
                         {
 
-                          MidColContentDiv.Helpers.HTML("<p><b>Delivery:</b></p>");
+                          MidColContentDiv.Helpers.HTML("<p>Delivery:</p>");
 
-                          var first = MidColContentDiv.Helpers.Button("Enter Address", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                          first.AddClass("btn btn-info btn-outline");
-                          first.AddBinding(Singular.Web.KnockoutBindingString.click, "EnterAddress($data)");
+                          //var first = MidColContentDiv.Helpers.Button("Enter Address", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                          //first.AddClass("btn btn-info btn-outline");
+                          //first.AddBinding(Singular.Web.KnockoutBindingString.click, "EnterAddress($data)");
+                          var LabelAmount = MidColContentDiv.Helpers.HTML("<p>Enter Address:</p>");
+                          var createEditor = MidColContentDiv.Helpers.DivC("row");
+                          {
+                            var editorSize = createEditor.Helpers.DivC("col-md-6");
+                            {
+                              var labelEditor = editorSize.Helpers.EditorFor(a => a.PostalAddress, "enter your postal address");
+                              {
+                                var EnteredAmount = labelEditor.AddClass("form-control text-left");
+                              }
+                            }
+                          }
                         }
                         var RightColContentDiv = AddingFunds.Helpers.DivC("col-md-12");
                         {

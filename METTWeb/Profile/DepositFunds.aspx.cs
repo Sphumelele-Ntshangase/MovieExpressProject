@@ -23,7 +23,7 @@ namespace MEWeb.Profile
     public UserAccount UserAccount { get; set; }
     public int UserID { get; set; }
     public decimal Balance { get; set; }
-    public Email EmailAddress { get; set; }
+    public string PostalAddress { get; set; }
 
     
     public DepositFundsVM()

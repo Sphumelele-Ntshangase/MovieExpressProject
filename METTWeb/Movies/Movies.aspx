@@ -49,6 +49,9 @@
                           var WatchBtn = MovieRating.Helpers.Button("", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.plus);
                           WatchBtn.AddClass("btn btn-primary btn-outline");
                           WatchBtn.Tooltip = "Add to your wishlist";
+
+                          WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "Wishlist()");
+
                         }
                         var MovieAction = Rows.AddColumn("Movie Price");
                         {
@@ -63,10 +66,10 @@
                           //WatchBtn.AddClass("btn btn-danger btn-outline");
                           //WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "WatchMovie($data)");
 
-                          var AddButton = editCol.Helpers.Button("Add to Cart", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                          var AddButton = editCol.Helpers.Button("Add to Cart", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.shoppingCart);
                           AddButton.AddClass("btn btn-danger btn-outline");
                           AddButton.AddBinding(Singular.Web.KnockoutBindingString.click, "GoToCart($data)");
-                          AddButton.Tooltip = "Add to orders";
+                          AddButton.Tooltip = "Add to basket";
                         }
                       }
                     }
@@ -94,15 +97,14 @@
                       {
                         var RowContentDiv1 = ContentDiv.Helpers.DivC("row");
                         {
-                          var RightColContentDiv1 = RowContentDiv1.Helpers.DivC("col-md-12");
+
+                          var MovieTitleContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
                           {
-                            var MovieTitleContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
-                            {
-                              MovieTitleContentDiv.Helpers.LabelFor(c => ViewModel.MovieTitle);
-                              var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => ViewModel.MovieTitle);
-                              MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
-                            }
+                            MovieTitleContentDiv.Helpers.LabelFor(c => ViewModel.MovieTitle);
+                            var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => ViewModel.MovieTitle);
+                            MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
                           }
+
                           var MovieGenreContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
                           {
                             MovieGenreContentDiv.Helpers.LabelFor(c => ViewModel.MovieGenreID);
@@ -228,6 +230,10 @@
     var Navigate = function () {
       window.location = '../Profile/Transactions.aspx';
 
+    };
+
+    var Wishlist = function () {
+      MEHelpers.Notification("Movie successfully added to wishlist", 'center', 'success', 5000);
     };
 
     //var WatchMovie = function (obj) {
