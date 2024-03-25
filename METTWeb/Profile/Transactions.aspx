@@ -251,23 +251,46 @@
 
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to delete this item?", 'center',
         function () { // Yes
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() - ViewModel.Movie().Price();
-          ViewModel.UserAccount().TotalPurchased(totalPrice);
-          var jsonBalance = ViewModel.UserAccount().Serialise();
-
-          ViewModel.CallServerMethod('DeleteMovie', { MovieID: obj.MovieID(), Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+          ViewModel.CallServerMethod('DeleteMovie', { MovieID: obj.MovieID(), ShowLoadingBar: true }, function (result) {
             if (result.Success) {
               ViewModel.UserMovieList.Set(result.Data);
-              ViewModel.UserAccount.Set(result.Data);
               MEHelpers.Notification("Item deleted successfully.", 'center', 'success', 5000);
             }
             else {
               MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
             }
           })
+
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() - ViewModel.Movie().Price();
+          ViewModel.UserAccount().TotalPurchased(totalPrice);
+          var jsonBalance = ViewModel.UserAccount().Serialise();
+
+          ViewModel.CallServerMethod('UpdateBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+            if (result.Success) {
+              ViewModel.UserAccount.Set(result.Data);
+            }
+            else {
+              MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+            }
+
+          });
         },
         function () { // No
         })
+
+      //var totalPrice = ViewModel.UserAccount().TotalPurchased() - ViewModel.Movie().Price();
+      //ViewModel.UserAccount().TotalPurchased(totalPrice);
+      //var jsonBalance = ViewModel.UserAccount().Serialise();
+
+      //ViewModel.CallServerMethod('UpdateBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+      //  if (result.Success) {
+      //    ViewModel.UserAccount.Set(result.Data);
+      //  }
+      //  else {
+      //    MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+      //  }
+
+      //});
     };
 
 

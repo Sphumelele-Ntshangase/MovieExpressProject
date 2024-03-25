@@ -98,6 +98,35 @@ namespace MEWeb.Profile
       return store;
     }
 
+    [WebCallable]
+    public Result UpdateBalance(UserAccount Account)
+    {
+      Result store = new Result();
+
+      if (Account != null && Account.IsValid)
+      {
+        Singular.SaveHelper SavedBalanceSaveHelper = Account.TrySave(typeof(UserAccountList)); // specify the type of list where the user balance will be saved
+        UserAccount SavedUserAccount = (UserAccount)SavedBalanceSaveHelper.SavedObject;
+
+        if (SavedBalanceSaveHelper.Success)
+        {
+          store.Data = SavedUserAccount;
+          store.Success = true;
+        }
+        else
+        {
+          store.ErrorText = "Could not deduct the amount";
+          store.Success = false;
+        }
+      }
+      else
+      {
+        store.ErrorText = "Account provided is invalid";
+        store.Success = false;
+      }
+      return store;
+    }
+
     //[WebCallable]
     //public Result FilterMovies(int MovieGenreID)
     //{
@@ -118,7 +147,7 @@ namespace MEWeb.Profile
     //}
 
     [WebCallable]
-    public static Result DeleteMovie(int MovieID, UserAccount Account)
+    public static Result DeleteMovie(int MovieID)
     {
       MEIdentity identity = MEWebSecurity.CurrentIdentity();
       Result sr = new Result();
@@ -138,7 +167,7 @@ namespace MEWeb.Profile
 
           if (SavedMovieStatusSaveHelper.Success)
           {
-            sr.Data = SavedMovieStatus;//UserMovieList.GetUserMovieList();
+            sr.Data = UserMovieList.GetUserMovieList();
             sr.Success = true;
           }
           else
