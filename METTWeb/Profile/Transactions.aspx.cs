@@ -138,7 +138,7 @@ namespace MEWeb.Profile
 
           if (SavedMovieStatusSaveHelper.Success)
           {
-            sr.Data = UserMovieList.GetUserMovieList();
+            sr.Data = SavedMovieStatus;//UserMovieList.GetUserMovieList();
             sr.Success = true;
           }
           else

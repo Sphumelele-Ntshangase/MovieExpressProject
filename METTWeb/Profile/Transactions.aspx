@@ -55,7 +55,7 @@
                         {
                           var LeftColContentDiv = Headings.Helpers.DivC("col-md-12");
                           {
-                            LeftColContentDiv.Helpers.HTML("<b>NOTICE: </b>Clicking <b>Remove</b>, deletes the movie from the list.");
+                            LeftColContentDiv.Helpers.HTML("<b>NOTICE: </b>Clicking <b>Remove</b> deletes the movie from the list, and clicking <b>Checkout</b> will deduct the price from your account balance");
                             LeftColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true);
                             //create a table using bootstrap
                             var PurchaseTable = LeftColContentDiv.Helpers.BootstrapTableFor<MELib.Movies.UserMovie>((c) => c.UserMovieList, false, false, "");
@@ -164,7 +164,7 @@
                         {
                           var MovieGenreContentDiv = RowContentDiv2.Helpers.DivC("col-md-12");
                           {
-                            MovieGenreContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Total purchase is: R " + c.UserAccount.TotalPurchased + " and " + c.UserMovieList.Count + " items.");
+                            MovieGenreContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Total purchase is: R " + c.UserAccount.TotalPurchased + " and " + c.UserMovieList.Count + " item(s).");
                           }
                         }
                       }
@@ -251,7 +251,7 @@
 
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to delete this item?", 'center',
         function () { // Yes
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() - ViewModel.Movie().Price();
           ViewModel.UserAccount().TotalPurchased(totalPrice);
           var jsonBalance = ViewModel.UserAccount().Serialise();
 

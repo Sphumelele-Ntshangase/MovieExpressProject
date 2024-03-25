@@ -67,7 +67,7 @@
                       var CardTitleDiv = AnotherCardDiv.Helpers.DivC("ibox-title");
                       {
                         CardTitleDiv.Helpers.HTML("<i class='ffa-lg fa-fw pull-left'></i>");
-                        CardTitleDiv.Helpers.HTML().Heading5("Watched Recently");
+                        CardTitleDiv.Helpers.HTML().Heading5("Movies On Your Cart");
                       }
                       var CardTitleToolsDiv = CardTitleDiv.Helpers.DivC("ibox-tools");
                       {
@@ -101,7 +101,7 @@
                               }
                               var WatchBtn = MoviesWatchedDiv.Helpers.Button("", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                               {
-                                WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Watch Again");
+                                WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Watch Movie");
                                 WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "RentMovie($data)");
                                 WatchBtn.AddClass("btn btn-primary btn-outline margin-top-10");
                               }

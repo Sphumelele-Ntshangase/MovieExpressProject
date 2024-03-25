@@ -78,7 +78,7 @@
                           third.AddClass("btn btn-info btn-outline");
                           third.AddBinding(Singular.Web.KnockoutBindingString.click, "MasterCard($data)");
 
-                          var LabelAmount = LeftColContentDiv.Helpers.HTML("<p>Enter Amount:</p>");
+                          var LabelAmount = LeftColContentDiv.Helpers.HTML("<p><br>Enter Amount:</p>");
                           var createEditor = LeftColContentDiv.Helpers.DivC("row");
                           {
                             var editorSize = createEditor.Helpers.DivC("col-md-6");
@@ -107,7 +107,6 @@
                   #region Checkout Column / Filters
                   var MiddleColRight = RowContentDiv.Helpers.DivC("col-md-6");
                   {
-
                     var AnotherCardDiv = MiddleColRight.Helpers.DivC("ibox float-e-margins paddingBottom");
                     {
                       var CardTitleDiv = AnotherCardDiv.Helpers.DivC("ibox-title");
@@ -127,44 +126,43 @@
                     }
                     var ContentDiv = AnotherCardDiv.Helpers.DivC("ibox-content");
                     {
-                      var AddingFunds = ContentDiv.Helpers.DivC("row");
+                      ContentDiv.Helpers.HTML("<p><h4>Tickets Delivery Options:</h4></p>");
+                      var CheckoutRow = ContentDiv.Helpers.DivC("row");
                       {
-                        var RowDiv = AddingFunds.Helpers.DivC("col-md-12");
+                        var RowDiv = CheckoutRow.Helpers.DivC("col-md-12");
                         {
 
+                        }                        
+                        var LeftColContentDiv = CheckoutRow.Helpers.DivC("col-md-12");
+                        {
+                          LeftColContentDiv.Helpers.HTML("<input type=\"radio\" id=\"collection\" name=\"option\" value=\"collect\">\r\n<label for=\"collect\">Collection</label>");
+                          var createEditor = LeftColContentDiv.Helpers.DivC("row");
+                          {
+                            var editorSize = createEditor.Helpers.DivC("col-md-6");
+                            {
+                              editorSize.Helpers.HTML("<label for=\"start\">Choose date:</label>\n\n<input type=\"date\" id=\"start\" name=\"collect-date\" value=\"yyyy-mm-dd\" min=\"2024-04-01\" max=\"2024-24-31\" />");
+                            }
+                          }
                         }
-                        var LeftColContentDiv = AddingFunds.Helpers.DivC("col-md-12 marginBottom20");
+                        var MidColContentDiv = CheckoutRow.Helpers.DivC("col-md-12 marginBottom20");
                         {
-
-                          LeftColContentDiv.Helpers.HTML("<p><h4>Tickets Delivery Options:</h4></p>");
-                          LeftColContentDiv.Helpers.HTML("<p>Collection:</p>");
-                          var dateBtn = LeftColContentDiv.Helpers.Button("Choose Date", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.calendar);
-                          dateBtn.AddClass("btn btn-info btn-outline");
-                          dateBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "ChooseDate()");
-
-
-                        }
-                        var MidColContentDiv = AddingFunds.Helpers.DivC("col-md-12 marginBottom20");
-                        {
-
-                          MidColContentDiv.Helpers.HTML("<p>Delivery:</p>");
-
+                          LeftColContentDiv.Helpers.HTML("<br>\r\n<input type=\"radio\" id=\"delivery\" name=\"option\" value=\"deliver\">\r\n<label for=\"deliver\">Delivery</label>");
                           //var first = MidColContentDiv.Helpers.Button("Enter Address", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                           //first.AddClass("btn btn-info btn-outline");
                           //first.AddBinding(Singular.Web.KnockoutBindingString.click, "EnterAddress($data)");
-                          var LabelAmount = MidColContentDiv.Helpers.HTML("<p>Enter Address:</p>");
+                          var LabelAmount = MidColContentDiv.Helpers.HTML("<label for=\"start\">Enter Address:</label>");
                           var createEditor = MidColContentDiv.Helpers.DivC("row");
                           {
                             var editorSize = createEditor.Helpers.DivC("col-md-6");
                             {
-                              var labelEditor = editorSize.Helpers.EditorFor(a => a.PostalAddress, "enter your postal address");
+                              var labelEditor = editorSize.Helpers.EditorFor(a => a.PostalAddress, "e.g., 11 Imam Haron Rd, Claremont, Cape Town, 7708");
                               {
                                 var EnteredAmount = labelEditor.AddClass("form-control text-left");
                               }
                             }
                           }
                         }
-                        var RightColContentDiv = AddingFunds.Helpers.DivC("col-md-12");
+                        var RightColContentDiv = CheckoutRow.Helpers.DivC("col-md-12");
                         {
                           // Fund Account Button
                           var AddFunds = RightColContentDiv.Helpers.Button("Complete Order", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
@@ -172,6 +170,7 @@
                             AddFunds.AddBinding(Singular.Web.KnockoutBindingString.click, "CompleteOrder($data)");
                             AddFunds.AddClass("btn btn-primary btn-outline pull-right");
                           }
+                          //var dialog = RightColContentDiv.Helpers.PopupDialog("Order Completed!", "You can return Home to watch your movies.");
                         }
                       }
                     }
@@ -213,7 +212,6 @@
           }
 
         });
-        inputElement.UserAccount().Set(0);
       }
       else {
         MEHelpers.Notification("Enter a value greater than 0", 'center', 'warning', 5000);
@@ -230,19 +228,27 @@
     var MasterCard = function () {
 
     }
-    var EnterAddress = function () {
+    //var EnterAddress = function () {
 
-    }
-    var EnterEmail = function () {
+    //}
+    //var EnterEmail = function () {
 
-    }
+    //}
     var CompleteOrder = function () {
       //create a popup that will notify that the order is completed
+      //MEHelpers.Notification("Order Completed! You can go back to Home to watch your movies", 'center', 'success', 5000);
+      if (confirm("Order Completed!You can go back Home to watch your movies")) {
+        window.location = window.location = '../Account/Home.aspx';
+      }
+      else {
+        //window.location = window.location = '../Profile/DepositFunds.aspx';
+      }
+
+
     }
 
-    var ChooseDate = function () {
-      //create a calendar popup
-    }
+    //var ChooseDate = function () {
+    //}
 
   </script>
 </asp:Content>

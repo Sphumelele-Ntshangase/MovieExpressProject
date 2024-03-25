@@ -62,10 +62,6 @@
                           editCol.Style.Width = "150px";
                           editCol.Style.TextAlign = Singular.Web.TextAlign.center;
 
-                          //var WatchBtn = editCol.Helpers.Button("Watch Now", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                          //WatchBtn.AddClass("btn btn-danger btn-outline");
-                          //WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "WatchMovie($data)");
-
                           var AddButton = editCol.Helpers.Button("Add to Cart", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.shoppingCart);
                           AddButton.AddClass("btn btn-danger btn-outline");
                           AddButton.AddBinding(Singular.Web.KnockoutBindingString.click, "GoToCart($data)");
@@ -142,7 +138,7 @@
                       {
                         var MovieGenreContentDiv = RowContentDiv2.Helpers.DivC("col-md-12");
                         {
-                          MovieGenreContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Total purchase is: R " + c.UserAccount.TotalPurchased + " and " + c.UserMovieList.Count + " items.");
+                          MovieGenreContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Total purchase is: R " + c.UserAccount.TotalPurchased + " and " + c.UserMovieList.Count + " item(s).");
                         }
                       }
                     }
@@ -193,11 +189,10 @@
               MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
             }
           })
-        },
-        function () { // No
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
-          ViewModel.UserAccount().TotalPurchased(totalPrice);
-          var jsonBalance = ViewModel.UserAccount().Serialise();
+          // ADDING price of purchased items
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
+          ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
+          var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
 
           ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
             if (result.Success) {
@@ -208,23 +203,25 @@
             }
 
           });
+        },
+        function () { // No
+          //var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+          //ViewModel.UserAccount().TotalPurchased(totalPrice);
+          //var jsonBalance = ViewModel.UserAccount().Serialise();
+
+          //ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+          //  if (result.Success) {
+          //    ViewModel.UserAccount.Set(result.Data);
+          //  }
+          //  else {
+          //    MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+          //  }
+
+          //});
         }
       )
 
-      // ADDING price of purchased items
-      var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
-      ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
-      var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
-
-      ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
-        if (result.Success) {
-          ViewModel.UserAccount.Set(result.Data);
-        }
-        else {
-          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-        }
-
-      });
+      
     };
 
     var Navigate = function () {
