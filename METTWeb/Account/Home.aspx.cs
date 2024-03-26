@@ -10,6 +10,7 @@ using MELib.RO;
 using MELib.Security;
 using Singular;
 using MELib.Accounts;
+using MELib.Movies;
 
 namespace MEWeb.Account
 {
@@ -23,6 +24,9 @@ namespace MEWeb.Account
   {
     // Declare your page variables/properties here
     MEIdentity identity = MEWebSecurity.CurrentIdentity();
+
+    public MELib.Movies.MovieList MovieList { get; set; }
+
     public bool FoundUserMoviesInd { get; set; }
 
     public string LoggedInUserName { get; set; }
@@ -41,8 +45,8 @@ namespace MEWeb.Account
       base.Setup();
 
       // On page load initiate/set your data/variables and or properties here
-
-     UserMovieList = MELib.Movies.UserMovieList.GetUserMovieList();
+      MovieList = MELib.Movies.MovieList.GetMovieList();
+      UserMovieList = MELib.Movies.UserMovieList.GetUserMovieList();
 
       if (UserMovieList.Count() > 0)
       {

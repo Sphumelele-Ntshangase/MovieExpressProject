@@ -77,7 +77,7 @@
                                 editCol.Style.Width = "300px";
                                 editCol.Style.TextAlign = Singular.Web.TextAlign.center;
 
-                                var deleteButton = editCol.Helpers.Button("Remove", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                                var deleteButton = editCol.Helpers.Button("Remove", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.trash);
                                 deleteButton.AddClass("btn-danger btn btn-outline");
                                 deleteButton.AddBinding(Singular.Web.KnockoutBindingString.click, "DeleteMovie($data)");
                                 deleteButton.Tooltip = "Remove from purchases";
@@ -262,6 +262,19 @@
           });
         },
         function () { // No
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price();
+          ViewModel.UserAccount().TotalPurchased(totalPrice);
+          var jsonBalance = ViewModel.UserAccount().Serialise();
+
+          ViewModel.CallServerMethod('UpdateBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+            if (result.Success) {
+              ViewModel.UserAccount.Set(result.Data);
+            }
+            else {
+              MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+            }
+
+          });
         })
 
       var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();

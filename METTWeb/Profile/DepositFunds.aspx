@@ -68,15 +68,15 @@
 
                           var first = LeftColContentDiv.Helpers.Button("PayPal", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.paypal);
                           first.AddClass("btn btn-info btn-outline");
-                          first.AddBinding(Singular.Web.KnockoutBindingString.click, "PayPal($data)");
+                          first.AddBinding(Singular.Web.KnockoutBindingString.click, "PayPal()");
 
                           var second = LeftColContentDiv.Helpers.Button("Visa", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.cc_visa);
                           second.AddClass("btn btn-info btn-outline");
-                          second.AddBinding(Singular.Web.KnockoutBindingString.click, "Visa($data)");
+                          second.AddBinding(Singular.Web.KnockoutBindingString.click, "Visa()");
 
                           var third = LeftColContentDiv.Helpers.Button("MasterCard", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.cc_mastercard);
                           third.AddClass("btn btn-info btn-outline");
-                          third.AddBinding(Singular.Web.KnockoutBindingString.click, "MasterCard($data)");
+                          third.AddBinding(Singular.Web.KnockoutBindingString.click, "MasterCard()");
 
                           var LabelAmount = LeftColContentDiv.Helpers.HTML("<p><br>Enter Amount:</p>");
                           var createEditor = LeftColContentDiv.Helpers.DivC("row");
@@ -167,10 +167,10 @@
                           // Fund Account Button
                           var AddFunds = RightColContentDiv.Helpers.Button("Complete Order", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                           {
-                            AddFunds.AddBinding(Singular.Web.KnockoutBindingString.click, "CompleteOrder($data)");
+                            AddFunds.AddBinding(Singular.Web.KnockoutBindingString.click, "CompleteOrder()");
                             AddFunds.AddClass("btn btn-primary btn-outline pull-right");
                           }
-                          //var dialog = RightColContentDiv.Helpers.PopupDialog("Order Completed!", "You can return Home to watch your movies.");
+                          
                         }
                       }
                     }
@@ -204,8 +204,8 @@
 
         ViewModel.CallServerMethod('AddBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
           if (result.Success) {
-            ViewModel.UserAccount().Set(result.Data);
-            alert("Balance Updated"); // getting an error that .Set(...) is not a function, hence it doesn't get to this line
+            ViewModel.UserAccount.Set(result.Data);
+            MEHelpers.Notification("Balance Updated", 'center', 'success', 5000);
           }
           else {
             MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
@@ -231,13 +231,9 @@
     //var EnterAddress = function () {
 
     //}
-    //var EnterEmail = function () {
-
-    //}
     var CompleteOrder = function () {
-      //create a popup that will notify that the order is completed
-      //MEHelpers.Notification("Order Completed! You can go back to Home to watch your movies", 'center', 'success', 5000);
-      if (confirm("Order Completed!You can go back Home to watch your movies")) {
+      
+      if (confirm("Order Completed! You can go back Home to watch your movies")) {
         window.location = window.location = '../Account/Home.aspx';
       }
       else {
@@ -246,9 +242,6 @@
 
 
     }
-
-    //var ChooseDate = function () {
-    //}
 
   </script>
 </asp:Content>

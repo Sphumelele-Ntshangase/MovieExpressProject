@@ -85,10 +85,11 @@
                           // Show if Movies Watched USe Knockout Binding and Property on ViewModel
                           var MovieColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
                           {
-                            MovieColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true); // false removes movie visibility on homepage
+                            //MovieColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true); // false removes movie visibility on homepage
 
                             var MovieColContainer = MovieColContentDiv.Helpers.DivC("movies-container");
                             {
+                              //var MoviesWatchedDiv = MovieColContainer.Helpers.ForEach<MELib.Movies.Movie>(c => c.MovieList);
                               var MoviesWatchedDiv = MovieColContainer.Helpers.ForEach<MELib.Movies.UserMovie>(c => c.UserMovieList);
                               {
 
@@ -117,7 +118,7 @@
                           {
                             //ColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true);
                             // Place Content Here
-                            // ColContentDiv.Helpers.HTML("<p>[ You have not watched any movies, follow the link below to browse available movies. ]</p>");
+                            //ColContentDiv.Helpers.HTML("<br><p>[ You have not watched any movies, follow the link below to browse available movies. ]</p>");
 
                             // Browse Movies Button
                             var BroweseBtn = ColContentDiv.Helpers.Button("Browse Movies", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
