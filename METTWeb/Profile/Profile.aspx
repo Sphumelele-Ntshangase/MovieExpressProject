@@ -92,7 +92,7 @@
                         {
                           var ChangeDetails = ContentDiv.Helpers.DivC("row");
                           {
-                            var MidColContentDiv = ChangeDetails.Helpers.DivC("col-md-12");
+                            var MidColContentDiv = ChangeDetails.Helpers.DivC("col-md-12 marginBottom20");
                             {
                               //showing details
                               MidColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Name: " + c.UserAccount.UserName);
