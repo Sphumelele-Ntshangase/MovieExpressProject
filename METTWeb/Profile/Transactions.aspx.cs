@@ -28,22 +28,12 @@ namespace MEWeb.Profile
 
     public MELib.Movies.Movie Movie { get; set; }    
     public UserAccount UserAccount { get; set; }
-    public MELib.Movies.MovieList ShowMovies { get; set; }
-    public MELib.Movies.MovieList MovieList { get; set; }
-    public MELib.Movies.UserMovie MovieStatus { get; set; }
     public MELib.Movies.UserMovieList UserMovieList { get; set; }
-    public UserAccount TotalPurchased { get; set; }
 
     public int MovieID { get; set; }
-    public int UserID { get; set; }
     
     public bool FoundUserMoviesInd { get; set; }
 
-    public decimal Price { get; set; }
-    public decimal Balance { get; set; }
-      
-    public String MovieTitle { get; set; }
-    
 
     [Singular.DataAnnotations.DropDownWeb(typeof(MELib.RO.ROMovieGenreList), UnselectedText = "Select", ValueMember = "MovieGenreID", DisplayMember = "Genre")] //this enabled a list of genres on the site
     [Display(Name = "Genre")]

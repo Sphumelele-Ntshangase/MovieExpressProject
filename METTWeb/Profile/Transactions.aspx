@@ -66,12 +66,12 @@
                                 var MovieTitleText = MovieTitle.Helpers.Span(c => c.MovieTitle);
                                 MovieTitle.Style.Width = "450px";
                               }
-                              //var MoviePriceCol = FirstRow.AddColumn("Price");
-                              //{
-                              //  MoviePriceCol.AddBinding(Singular.Web.KnockoutBindingString.text, a => a.Price);
-                              //  var MoviePriceValue = MoviePriceCol.Helpers.Span(c => c.Price);
-                              //  MoviePriceCol.Style.Width = "450px";
-                              //}
+                              var MoviePriceCol = FirstRow.AddColumn("Price");
+                              {
+                                MoviePriceCol.AddBinding(Singular.Web.KnockoutBindingString.text, a => a.Price);
+                                var MoviePriceValue = MoviePriceCol.Helpers.Span(c => c.Price);
+                                MoviePriceCol.Style.Width = "450px";
+                              }
                               var editCol = FirstRow.AddColumn("Action");
                               {
                                 editCol.Style.Width = "300px";
@@ -228,7 +228,7 @@
           if (result.Success) {
             ViewModel.UserMovieList.Set(result.Data);
             ViewModel.UserAccount.Set(result.Data);
-            
+
             window.location = '../Profile/DepositFunds.aspx';
             alert("Total purchase has been deducted");
           }
@@ -259,40 +259,25 @@
             else {
               MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
             }
-          })
-
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() - ViewModel.Movie().Price();
-          ViewModel.UserAccount().TotalPurchased(totalPrice);
-          var jsonBalance = ViewModel.UserAccount().Serialise();
-
-          ViewModel.CallServerMethod('UpdateBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
-            if (result.Success) {
-              ViewModel.UserAccount.Set(result.Data);
-            }
-            else {
-              MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-            }
-
           });
         },
         function () { // No
         })
 
-      //var totalPrice = ViewModel.UserAccount().TotalPurchased() - ViewModel.Movie().Price();
-      //ViewModel.UserAccount().TotalPurchased(totalPrice);
-      //var jsonBalance = ViewModel.UserAccount().Serialise();
+      var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+      ViewModel.UserAccount().TotalPurchased(totalPrice);
+      var jsonBalance = ViewModel.UserAccount().Serialise();
 
-      //ViewModel.CallServerMethod('UpdateBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
-      //  if (result.Success) {
-      //    ViewModel.UserAccount.Set(result.Data);
-      //  }
-      //  else {
-      //    MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-      //  }
+      ViewModel.CallServerMethod('UpdateBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+        if (result.Success) {
+          ViewModel.UserAccount.Set(result.Data);
+        }
+        else {
+          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+        }
 
-      //});
-    };
-
+      });
+    }
 
 
   </script>

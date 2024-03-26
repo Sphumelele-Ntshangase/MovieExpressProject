@@ -30,11 +30,8 @@ namespace MEWeb.Movies
 
     // Filter Criteria
     public String MovieTitle { get; set; }
-    public DateTime ReleaseFromDate { get; set; }
-    public DateTime ReleaseToDate { get; set; }
 
     public UserAccount UserAccount { get; set; }
-    public decimal Balance { get; set; }
 
     /// <summary>
     /// Gets or sets the Movie Genre ID

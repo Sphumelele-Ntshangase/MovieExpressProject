@@ -90,6 +90,25 @@ namespace MELib.Movies
       set { SetProperty(MovieImageURLProperty, value); }
     }
 
+    public static PropertyInfo<Decimal> PriceProperty = RegisterProperty<decimal>(c => c.Price, "Price", Convert.ToDecimal(0));//added
+    /// <summary>
+    /// Gets and sets the Release Date value
+    /// </summary>
+    [Display(Name = "Price", Description = "Price"),
+    Required(ErrorMessage = "Price required"),
+    Singular.DataAnnotations.NumberField("R #,##0.#;(R #,##0.#)")]
+    public decimal Price
+    {
+      get
+      {
+        return GetProperty(PriceProperty);
+      }
+      set
+      {
+        SetProperty(PriceProperty, value);
+      }
+    }
+
     public static PropertyInfo<DateTime?> WatchedDateProperty = RegisterProperty<DateTime?>(c => c.WatchedDate, "Watched Date");
     /// <summary>
     /// Gets and sets the Watched Date value
@@ -272,6 +291,7 @@ namespace MELib.Movies
         LoadProperty(CreatedByProperty, sdr.GetInt32(i++));
         LoadProperty(ModifiedDateProperty, sdr.GetSmartDate(i++));
         LoadProperty(ModifiedByProperty, sdr.GetInt32(i++));
+        LoadProperty(PriceProperty, sdr.GetValue(i++));
       }
 
       MarkAsChild();
@@ -295,6 +315,7 @@ namespace MELib.Movies
       cm.Parameters.AddWithValue("@DeletedDate", Singular.Misc.NothingDBNull(DeletedDate));
       cm.Parameters.AddWithValue("@DeletedBy", GetProperty(DeletedByProperty));
       cm.Parameters.AddWithValue("@ModifiedBy", GetProperty(ModifiedByProperty));
+      //cm.Parameters.AddWithValue("@Price", GetProperty(PriceProperty)); //added
 
       return (scm) =>
       {
