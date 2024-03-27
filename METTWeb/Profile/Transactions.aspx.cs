@@ -44,7 +44,7 @@ namespace MEWeb.Profile
       base.Setup();
 
       UserAccount = UserAccountList.GetUserAccountList(identity.UserID).FirstOrDefault();
-      //UserAccount.UserName = MELib.CommonData.Lists.ROUserList.GetItem(identity.UserID).FullName;
+      //UserAccount.UserName = MELib.CommonData.Lists.ROUserList.GetItem(identity.UserID).FullName; // Another way of getting a user name
       Movie = MELib.Movies.MovieList.GetMovieList().FirstOrDefault();
       
       UserMovieList = MELib.Movies.UserMovieList.GetUserMovieList();
@@ -116,25 +116,6 @@ namespace MEWeb.Profile
       }
       return store;
     }
-
-    //[WebCallable]
-    //public Result FilterMovies(int MovieGenreID)
-    //{
-    //  Result sr = new Result();
-    //  try
-    //  {
-    //    sr.Data = MELib.Movies.MovieList.GetMovieList(MovieGenreID);
-    //    sr.Success = true;
-    //  }
-    //  catch (Exception e)
-    //  {
-    //    WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(int MovieGenreID, ({MovieGenreID})");
-    //    sr.Data = e.InnerException;
-    //    sr.ErrorText = "Could not filter movies by category.";
-    //    sr.Success = false;
-    //  }
-    //  return sr;
-    //}
 
     [WebCallable]
     public static Result DeleteMovie(int MovieID)

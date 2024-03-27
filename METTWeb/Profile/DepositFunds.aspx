@@ -83,7 +83,7 @@
                           {
                             var editorSize = createEditor.Helpers.DivC("col-md-6");
                             {
-                              var labelEditor = editorSize.Helpers.EditorFor(a => a.Balance, "");
+                              var labelEditor = editorSize.Helpers.EditorFor(a => a.Balance);
                               {
                                 var EnteredAmount = labelEditor.AddClass("form-control marginBottom20 text-left");
                               }
@@ -228,12 +228,24 @@
     var MasterCard = function () {
 
     }
-    //var EnterAddress = function () {
-
-    //}
+    
     var CompleteOrder = function () {
+    // reset total purchase to 0
+      var totalPrice = 0;
+      ViewModel.UserAccount().TotalPurchased(totalPrice);
+
+      ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+        if (result.Success) {
+          ViewModel.UserAccount.Set(result.Data);
+          
+        }
+        else {
+          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+        }
+
+      });
       
-      if (confirm("Order Completed! You can go back Home to watch your movies")) {
+      if (confirm("Order Completed! Click Ok to go back home")) {
         window.location = window.location = '../Account/Home.aspx';
       }
       else {

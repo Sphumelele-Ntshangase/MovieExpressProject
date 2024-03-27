@@ -138,7 +138,7 @@ namespace MEWeb.Movies
       }
       catch (Exception e)
       {
-        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(string MovieTitle, ({MovieTitle})");
+        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovieTitle", $"(string MovieTitle, ({MovieTitle})");
         sr.Data = e.InnerException;
         sr.ErrorText = "Could not filter movies by category.";
         sr.Success = false;

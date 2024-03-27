@@ -167,8 +167,6 @@
       $("#menuItem1 > ul").addClass('in');
     });
 
-
-
     var RentMovie = function (obj) {
       ViewModel.CallServerMethod('RentMovie', { MovieID: obj.MovieID(), ShowLoadingBar: true }, function (result) {
         if (result.Success) {

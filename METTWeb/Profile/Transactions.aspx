@@ -83,7 +83,6 @@
                                 deleteButton.Tooltip = "Remove from purchases";
                               }
                             }
-                            //LeftColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.value, a => a.Movie.Price);
                           }
                         }
                       }
@@ -93,54 +92,6 @@
                     #region Right Column / Filters
                     var RowColRight = RowContentDiv.Helpers.DivC("col-md-3");
                     {
-
-                      //var AnotherCardDiv = RowColRight.Helpers.DivC("ibox float-e-margins paddingBottom");
-                      //{
-                      //  var CardTitleDiv = AnotherCardDiv.Helpers.DivC("ibox-title");
-                      //  {
-                      //    CardTitleDiv.Helpers.HTML("<i class='ffa-lg fa-fw pull-left'></i>");
-                      //    CardTitleDiv.Helpers.HTML().Heading5("Filter Criteria");
-                      //  }
-                      //  var CardTitleToolsDiv = CardTitleDiv.Helpers.DivC("ibox-tools");
-                      //  {
-                      //    var aToolsTag = CardTitleToolsDiv.Helpers.HTMLTag("a");
-                      //    aToolsTag.AddClass("collapse-link");
-                      //    {
-                      //      var iToolsTag = aToolsTag.Helpers.HTMLTag("i");
-                      //      iToolsTag.AddClass("fa fa-chevron-up");
-                      //    }
-                      //  }
-                      //}
-                      //var ContentDiv = AnotherCardDiv.Helpers.DivC("ibox-content");
-                      //{
-                      //  var RowContentDiv1 = ContentDiv.Helpers.DivC("row");
-                      //  {
-                      //    var ColContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
-                      //    {
-                      //      var MovieTitleContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
-                      //      {
-                      //        MovieTitleContentDiv.Helpers.LabelFor(c => c.MovieTitle);
-                      //        var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => c.MovieTitle);
-                      //        MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
-                      //        MovieTitleEditor.AddBinding(Singular.Web.KnockoutBindingString.id, "MovieTitle");
-                      //      }
-                      //    }
-                      //    var MovieGenreContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
-                      //    {
-
-                      //      MovieGenreContentDiv.Helpers.LabelFor(c => ViewModel.MovieGenreID);
-                      //      var ReleaseFromDateEditor = MovieGenreContentDiv.Helpers.EditorFor(c => ViewModel.MovieGenreID);
-                      //      ReleaseFromDateEditor.AddClass("form-control marginBottom20 ");
-
-                      //      var FilterBtn = MovieGenreContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                      //      {
-                      //        FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovies($data)");
-                      //        FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
-                      //      }
-
-                      //    }
-                      //  }
-                      //}
                       var TotalCardDiv = RowColRight.Helpers.DivC("ibox float-e-margins paddingBottom");
                       {
                         var CardTitleDiv1 = TotalCardDiv.Helpers.DivC("ibox-title");
