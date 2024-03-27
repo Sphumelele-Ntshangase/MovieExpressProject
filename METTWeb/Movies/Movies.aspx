@@ -100,17 +100,23 @@
                             var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => ViewModel.MovieTitle);
                             MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
                           }
+                          var FilterBtn = MovieTitleContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                          {
+                            FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovieTitle($data)");
+                            FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
+                          }
 
                           var MovieGenreContentDiv = RowContentDiv1.Helpers.DivC("col-md-12");
                           {
                             MovieGenreContentDiv.Helpers.LabelFor(c => ViewModel.MovieGenreID);
                             var ReleaseFromDateEditor = MovieGenreContentDiv.Helpers.EditorFor(c => ViewModel.MovieGenreID);
                             ReleaseFromDateEditor.AddClass("form-control marginBottom20 filterBox");
-                          }
-                          var FilterBtn = RowContentDiv1.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                          {
-                            FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovies($data)");
-                            FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
+
+                            var FilterBtn1 = MovieGenreContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                            {
+                              FilterBtn1.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovies($data)");
+                              FilterBtn1.AddClass("btn btn-primary btn-outline pull-right");
+                            }
                           }
                         }
                       }
@@ -205,7 +211,7 @@
           //});
         },
         function () { // No
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price().toFixed(2);
           ViewModel.UserAccount().TotalPurchased(totalPrice);
           var jsonBalance = ViewModel.UserAccount().Serialise();
 
@@ -222,7 +228,7 @@
       )
 
       // ADDING price of purchased items
-      var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
+      var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price().toFixed(2); // add price to the total
       ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
       var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
 
@@ -286,6 +292,18 @@
         if (result.Success) {
           //MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
           ViewModel.MovieList.Set(result.Data); // returns movies matching the genre
+        }
+        else {
+          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+        }
+      })
+    };
+
+    var FilterMovieTitle = function (obj) {
+      ViewModel.CallServerMethod('FilterMovieTitle', { MovieTitle: obj.MovieTitle(), ShowLoadingBar: true }, function (result) {
+        if (result.Success) {
+          //MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
+          ViewModel.MovieList.Set(result.Data);
         }
         else {
           MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);

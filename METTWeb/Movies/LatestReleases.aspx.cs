@@ -63,6 +63,25 @@ namespace MEWeb.Movies
       }
       return sr;
     }
+    
+    [WebCallable]
+    public Result FilterMovieTitle(string MovieTitle)
+    {
+      Result sr = new Result();
+      try
+      {
+        sr.Data = MELib.Movies.MovieList.GetMovieList().FirstOrDefault(a => a.MovieTitle == MovieTitle);
+        sr.Success = true;
+      }
+      catch (Exception e)
+      {
+        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(string MovieTitle, ({MovieTitle})");
+        sr.Data = e.InnerException;
+        sr.ErrorText = "Could not filter movies by category.";
+        sr.Success = false;
+      }
+      return sr;
+    }
 
 
   }

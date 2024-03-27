@@ -29,7 +29,7 @@ namespace MEWeb.Movies
     public decimal Price { get; set; }
 
     // Filter Criteria
-    public String MovieTitle { get; set; }
+    public string MovieTitle { get; set; }
 
     public UserAccount UserAccount { get; set; }
 
@@ -120,6 +120,25 @@ namespace MEWeb.Movies
       catch (Exception e)
       {
         WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(int MovieGenreID, ({MovieGenreID})");
+        sr.Data = e.InnerException;
+        sr.ErrorText = "Could not filter movies by category.";
+        sr.Success = false;
+      }
+      return sr;
+    }
+
+    [WebCallable]
+    public Result FilterMovieTitle(string MovieTitle)
+    {
+      Result sr = new Result();
+      try
+      {
+        sr.Data = MELib.Movies.MovieList.GetMovieList().FirstOrDefault(a => a.MovieTitle == MovieTitle);
+        sr.Success = true;
+      }
+      catch (Exception e)
+      {
+        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(string MovieTitle, ({MovieTitle})");
         sr.Data = e.InnerException;
         sr.ErrorText = "Could not filter movies by category.";
         sr.Success = false;

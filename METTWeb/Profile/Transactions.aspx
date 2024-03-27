@@ -204,20 +204,6 @@
       $("#menuItem1 > ul").addClass('in');
     });
 
-    //var FilterMovies = function (obj) {
-    //  //alert('Movie Genre ID ' + obj.MovieGenreID());
-
-    //  ViewModel.CallServerMethod('FilterMovies', { MovieGenreID: obj.MovieGenreID(), ShowLoadingBar: true }, function (result) {
-    //    if (result.Success) {
-    //      MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
-    //      ViewModel.MovieList.Set(result.Data); // returns movies matching the genre
-    //    }
-    //    else {
-    //      MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-    //    }
-    //  })
-    //};
-
     var Checkout = function () { // deduct the price when the user clicks the button
       if (ViewModel.UserAccount().TotalPurchased() <= ViewModel.UserAccount().Balance()) {
         var newBalance = ViewModel.UserAccount().Balance() - ViewModel.UserAccount().TotalPurchased(); // deduct price from the balance
@@ -247,7 +233,6 @@
     }
 
     var DeleteMovie = function (obj) {
-      //console.log(obj.MovieID());
 
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to delete this item?", 'center',
         function () { // Yes
