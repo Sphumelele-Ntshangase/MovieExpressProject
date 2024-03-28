@@ -140,7 +140,7 @@
                           {
                             var editorSize = createEditor.Helpers.DivC("col-md-6");
                             {
-                              editorSize.Helpers.HTML("<label for=\"start\">Choose date:</label>\n\n<input type=\"date\" id=\"start\" name=\"collect-date\" value=\"yyyy-mm-dd\" min=\"2024-04-01\" max=\"2024-24-31\" />");
+                              editorSize.Helpers.HTML("<label for=\"start\">Choose date:</label>\n\n<input type=\"date\" id=\"start\" name=\"collect-date\" value=\"yyyy-mm-dd\" min=\"2024-04-01\" max=\"2024-12-31\" />");
                             }
                           }
                         }
@@ -206,6 +206,7 @@
           if (result.Success) {
             ViewModel.UserAccount.Set(result.Data);
             MEHelpers.Notification("Balance Updated", 'center', 'success', 5000);
+            ViewModel.Balance(0);
           }
           else {
             MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
@@ -233,6 +234,7 @@
     // reset total purchase to 0
       var totalPrice = 0;
       ViewModel.UserAccount().TotalPurchased(totalPrice);
+      var jsonBalance = ViewModel.UserAccount().Serialise();
 
       ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
         if (result.Success) {

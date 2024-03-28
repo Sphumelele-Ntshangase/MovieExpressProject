@@ -18,7 +18,7 @@ namespace MEWeb.Movies
 
     // Filter Criteria
     public String MovieTitle { get; set; }
-    public DateTime ReleaseFromDate { get; set; }
+    //public DateTime ReleaseFromDate { get; set; }
     public DateTime ReleaseToDate { get; set; }
     /// <summary>
     /// Gets or sets the Movie Genre ID
@@ -64,24 +64,24 @@ namespace MEWeb.Movies
       return sr;
     }
     
-    [WebCallable]
-    public Result FilterMovieTitle(string MovieTitle)
-    {
-      Result sr = new Result();
-      try
-      {
-        sr.Data = MELib.Movies.MovieList.GetMovieList().FirstOrDefault(a => a.MovieTitle == MovieTitle);
-        sr.Success = true;
-      }
-      catch (Exception e)
-      {
-        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovieTitle", $"(string MovieTitle, ({MovieTitle})");
-        sr.Data = e.InnerException;
-        sr.ErrorText = "Could not filter movies by category.";
-        sr.Success = false;
-      }
-      return sr;
-    }
+    //[WebCallable]
+    //public Result FilterByReleaseDate(DateTime ReleaseDate)
+    //{
+    //  Result sr = new Result();
+    //  try
+    //  {
+    //    sr.Data = MELib.Movies.MovieList.GetMovieList().Where(a => a.ReleaseDate == ReleaseDate);
+    //    sr.Success = true;
+    //  }
+    //  catch (Exception e)
+    //  {
+    //    WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovieTitle", $"(DateTime ReleaseDate, ({ReleaseDate})");
+    //    sr.Data = e.InnerException;
+    //    sr.ErrorText = "Could not filter movies by category.";
+    //    sr.Success = false;
+    //  }
+    //  return sr;
+    //}
 
 
   }

@@ -133,7 +133,7 @@ namespace MEWeb.Movies
       Result sr = new Result();
       try
       {
-        sr.Data = MELib.Movies.MovieList.GetMovieList().FirstOrDefault(a => a.MovieTitle == MovieTitle);
+        sr.Data = MELib.Movies.MovieList.GetMovieList().Where(a => a.MovieTitle == MovieTitle);
         sr.Success = true;
       }
       catch (Exception e)

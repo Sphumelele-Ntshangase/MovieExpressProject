@@ -57,7 +57,8 @@
                 {
                   var RowColMain = Row.Helpers.DivC("col-md-12");
                   {
-                    RowColMain.Helpers.HTML().Heading2("Welcome to Movie Express");
+                    RowColMain.Helpers.HTML().Heading2("Welcome to Movie Express<br><h4>Ster-Kinekor's child :)</h4>");
+
                     //RowColMain.Helpers.HTMLTag("p").HTML = "On your dashboard below you will see the most recent activities performed on your account.";
                     RowColMain.Helpers.HTMLTag("p").HTML = "On the dashboard below you are presented with movies you can enjoy.";
                   }
@@ -137,6 +138,45 @@
                   }
                   var RowCol = Row.Helpers.DivC("col-md-3");
                   {
+                    var AnotherCardDiv = RowCol.Helpers.DivC("ibox float-e-margins paddingBottom");
+                    {
+                      var CardTitleDiv = AnotherCardDiv.Helpers.DivC("ibox-title");
+                      {
+                        CardTitleDiv.Helpers.HTML("<i class='ffa-lg fa-fw pull-left'></i>");
+                        CardTitleDiv.Helpers.HTML().Heading5("Filter Criteria");
+                      }
+                      var CardTitleToolsDiv = CardTitleDiv.Helpers.DivC("ibox-tools");
+                      {
+                        var aToolsTag = CardTitleToolsDiv.Helpers.HTMLTag("a");
+                        aToolsTag.AddClass("collapse-link");
+                        {
+                          var iToolsTag = aToolsTag.Helpers.HTMLTag("i");
+                          iToolsTag.AddClass("fa fa-chevron-up");
+                        }
+                      }
+                      var ContentDiv = AnotherCardDiv.Helpers.DivC("ibox-content");
+                      {
+                        var RowContentDiv = ContentDiv.Helpers.DivC("row");
+                        {
+                          var ColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
+                          {
+                            var MovieTitleContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
+                            {
+                              MovieTitleContentDiv.Helpers.LabelFor(c => c.ReleaseFromDate);
+                              var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => c.ReleaseFromDate);
+                              MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
+                              //MovieTitleEditor.AddBinding(Singular.Web.KnockoutBindingString.DateAndTimeEditor, "ReleaseFromDate");
+                            }
+                            var FilterBtn = MovieTitleContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                            {
+                              FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterByReleaseDate($data)");
+                              FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
+                            }
+
+                          }
+                        }
+                      }
+                    }
 
                     var CardDiv = RowCol.Helpers.DivC("ibox float-e-margins paddingBottom");
                     {
@@ -215,6 +255,19 @@
     var FundAccount = function () {
       window.location = '../Profile/DepositFunds.aspx';
     }
+
+    var FilterByReleaseDate = function (obj) {
+
+      ViewModel.CallServerMethod('FilterByReleaseDate', { ReleaseDate: obj.ReleaseFromDate(), ShowLoadingBar: true }, function (result) {
+        if (result.Success) {
+          //MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
+          ViewModel.MovieList.Set(result.Data);
+        }
+        else {
+          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+        }
+      })
+    };
 
 
   </script>

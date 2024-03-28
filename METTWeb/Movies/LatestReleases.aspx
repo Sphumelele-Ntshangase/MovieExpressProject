@@ -119,22 +119,22 @@
                       {
                         var RowContentDiv = ContentDiv.Helpers.DivC("row");
                         {
-                          var ColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
-                          {
-                            var MovieTitleContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
-                            {
-                              MovieTitleContentDiv.Helpers.LabelFor(c => c.MovieTitle);
-                              var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => c.MovieTitle);
-                              MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
-                              MovieTitleEditor.AddBinding(Singular.Web.KnockoutBindingString.id, "MovieTitle");
-                            }
-                            var FilterBtn = MovieTitleContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                            {
-                              FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterMovieTitle($data)");
-                              FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
-                            }
-                            
-                          }
+                          //var ColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
+                          //{
+                          //  var MovieTitleContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
+                          //  {
+                          //    MovieTitleContentDiv.Helpers.LabelFor(c => c.ReleaseFromDate);
+                          //    var MovieTitleEditor = MovieTitleContentDiv.Helpers.EditorFor(c => c.ReleaseFromDate);
+                          //    MovieTitleEditor.AddClass("form-control marginBottom20 filterBox");
+                          //    //MovieTitleEditor.AddBinding(Singular.Web.KnockoutBindingString.DateAndTimeEditor, "ReleaseFromDate");
+                          //  }
+                          //  var FilterBtn = MovieTitleContentDiv.Helpers.Button("Apply Filter", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                          //  {
+                          //    FilterBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FilterByReleaseDate($data)");
+                          //    FilterBtn.AddClass("btn btn-primary btn-outline pull-right");
+                          //  }
+
+                          //}
                           var MovieGenreContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
                           {
                             MovieGenreContentDiv.Helpers.LabelFor(c => ViewModel.MovieGenreID);
@@ -191,21 +191,18 @@
       })
     };
 
-    var FilterMovieTitle = function (obj) {
-      //alert('test');
-      ViewModel.CallServerMethod('FilterMovieTitle', { MovieTitle: obj.MovieTitle(), ShowLoadingBar: true }, function (result) {
-        if (result.Success) {
-          //MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
-          ViewModel.MovieList.Set(result.Data);
-        }
-        else {
-          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-        }
-      })
-    };
-
-
-
+    //var FilterByReleaseDate = function (obj) {
+      
+    //  ViewModel.CallServerMethod('FilterByReleaseDate', { ReleaseDate: obj.ReleaseFromDate(), ShowLoadingBar: true }, function (result) {
+    //    if (result.Success) {
+    //      //MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
+    //      ViewModel.MovieList.Set(result.Data);
+    //    }
+    //    else {
+    //      MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+    //    }
+    //  })
+    //};
 
   </script>
 </asp:Content>

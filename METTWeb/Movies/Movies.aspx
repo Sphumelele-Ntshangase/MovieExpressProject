@@ -181,7 +181,7 @@
     });
 
     var GoToCart = function (obj) {
-
+      
       // ADD MOVIE TO CART
 
       MEHelpers.QuestionDialogYesNo("Are you sure you would like to add this item?", 'center',
@@ -197,7 +197,8 @@
           })
         },
         function () { // No
-          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price().toFixed(2);
+          var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+          totalPrice = Number(totalPrice.toFixed(2));
           ViewModel.UserAccount().TotalPurchased(totalPrice);
           var jsonBalance = ViewModel.UserAccount().Serialise();
 
@@ -209,12 +210,13 @@
               MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
             }
 
-          });
+          })
         }
-      )
+      );
 
       // ADDING price of purchased items
       var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
+      totalPrice = Number(totalPrice.toFixed(2));
       ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
       var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
 
@@ -226,7 +228,7 @@
           MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
         }
 
-      });
+      })
     };
 
     var Navigate = function () {
@@ -269,8 +271,8 @@
           MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
         }
 
-      });
-    }
+      })
+    };
 
     var FilterMovies = function (obj) {
 

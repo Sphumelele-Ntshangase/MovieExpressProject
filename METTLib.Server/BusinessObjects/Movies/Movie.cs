@@ -37,7 +37,7 @@ namespace MELib.Movies
     /// </summary>
     [Display(Name = "Movie Genre", Description = "Movie Genre ID"),
     Required(ErrorMessage = "Movie Genre required"),
-     Singular.DataAnnotations.DropDownWeb(typeof(MELib.RO.ROMovieGenreList), ValueMember = "MovieGenreID", DisplayMember = "Genre")]
+    Singular.DataAnnotations.DropDownWeb(typeof(MELib.RO.ROMovieGenreList), ValueMember = "MovieGenreID", DisplayMember = "Genre")]
     public int MovieGenreID
     {
       get { return GetProperty(MovieGenreIDProperty); }

@@ -32,6 +32,7 @@ namespace MEWeb.Account
     public string LoggedInUserName { get; set; }
 
     public UserAccount UserAccount { get; set; }
+    public DateTime ReleaseFromDate { get; set; }
 
     public MELib.Movies.UserMovieList UserMovieList { get; set; }
 
@@ -93,6 +94,26 @@ namespace MEWeb.Account
       catch (Exception e)
       {
         sr.Data = e.InnerException;
+        sr.Success = false;
+      }
+      return sr;
+    }
+
+    [WebCallable]
+    public Result FilterByReleaseDate(DateTime ReleaseDate)
+    {
+      Result sr = new Result();
+      try
+      {
+        sr.Data = MELib.Movies.MovieList.GetMovieList().Where(a => a.ReleaseDate == ReleaseDate);
+        //sr.Data = MELib.Movies.MovieList.GetMovieList();
+        sr.Success = true;
+      }
+      catch (Exception e)
+      {
+        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovieTitle", $"(DateTime ReleaseDate, ({ReleaseDate})");
+        sr.Data = e.InnerException;
+        sr.ErrorText = "Could not filter movies by category.";
         sr.Success = false;
       }
       return sr;

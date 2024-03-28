@@ -45,13 +45,15 @@ namespace MELib.Movies
       : CriteriaBase<Criteria>
     {
       public int? MovieGenreID = null;
+      public DateTime? ReleaseDate = null; //added
       public Criteria()
       {
       }
 
-      public Criteria(int? MovieGenreID)
+      public Criteria(int? MovieGenreID, DateTime? ReleaseDate) //added
       {
         this.MovieGenreID = MovieGenreID;
+        this.ReleaseDate = ReleaseDate; //added
       }
 
     }
@@ -75,6 +77,11 @@ namespace MELib.Movies
     {
       return DataPortal.Fetch<MovieList>(new Criteria { MovieGenreID = MovieGenreID });
     }
+
+    //public static MovieList GetMovieList(DateTime? ReleaseDate)
+    //{
+    //  return DataPortal.Fetch<MovieList>(new Criteria { ReleaseDate = ReleaseDate });
+    //}
 
     protected void Fetch(SafeDataReader sdr)
     {
@@ -100,6 +107,7 @@ namespace MELib.Movies
             cm.CommandText = "GetProcs.getMovieList";
 
             cm.Parameters.AddWithValue("@MovieGenreID", Singular.Misc.NothingDBNull(crit.MovieGenreID));
+            cm.Parameters.AddWithValue("@ReleaseDate", Singular.Misc.NothingDBNull(crit.ReleaseDate)); //added
 
             using (SafeDataReader sdr = new SafeDataReader(cm.ExecuteReader()))
             {

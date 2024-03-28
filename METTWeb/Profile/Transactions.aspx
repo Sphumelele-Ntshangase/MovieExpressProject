@@ -199,6 +199,7 @@
         },
         function () { // No
           var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price();
+          totalPrice = Number(totalPrice.toFixed(2));
           ViewModel.UserAccount().TotalPurchased(totalPrice);
           var jsonBalance = ViewModel.UserAccount().Serialise();
 
@@ -214,6 +215,7 @@
         })
 
       var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price();
+      totalPrice = Number(totalPrice.toFixed(2));
       ViewModel.UserAccount().TotalPurchased(totalPrice);
       var jsonBalance = ViewModel.UserAccount().Serialise();
 
