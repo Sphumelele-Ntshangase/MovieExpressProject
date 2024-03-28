@@ -195,20 +195,6 @@
               MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
             }
           })
-          //// ADDING price of purchased items
-          //var totalPrice = ViewModel.UserAccount().TotalPurchased() + obj.Price(); // add price to the total
-          //ViewModel.UserAccount().TotalPurchased(totalPrice); // set the total balance to the new one
-          //var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
-
-          //ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
-          //  if (result.Success) {
-          //    ViewModel.UserAccount.Set(result.Data);
-          //  }
-          //  else {
-          //    MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-          //  }
-
-          //});
         },
         function () { // No
           var totalPrice = ViewModel.UserAccount().TotalPurchased() - obj.Price().toFixed(2);

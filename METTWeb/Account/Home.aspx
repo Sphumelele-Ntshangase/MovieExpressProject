@@ -83,7 +83,7 @@
                       {
                         var RowContentDiv = ContentDiv.Helpers.DivC("row");
                         {
-                          
+
                           // Show if Movies Watched USe Knockout Binding and Property on ViewModel
                           var MovieColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
                           {
@@ -103,12 +103,12 @@
                                 MoviesWatchedDiv.Helpers.HTML("<b><span data-bind=\"text: $data.MovieTitle() \"  class='caption'></span></b>");
 
                               }
-                              var WatchBtn = MoviesWatchedDiv.Helpers.Button("", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                              {
-                                WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Watch Movie");
-                                WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "RentMovie($data)");
-                                WatchBtn.AddClass("btn btn-primary btn-outline margin-top-10");
-                              }
+                              //var WatchBtn = MoviesWatchedDiv.Helpers.Button("", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                              //{
+                              //  WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Watch Movie");
+                              //  WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "RentMovie($data)");
+                              //  WatchBtn.AddClass("btn btn-primary btn-outline margin-top-10");
+                              //}
                               MoviesWatchedDiv.Helpers.HTML("</div>");
                             }
                             var MoviPaginationColContainer = MovieColContentDiv.Helpers.DivC("pagination-container");
@@ -122,7 +122,7 @@
                             //ColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true);
                             // Place Content Here
                             //ColContentDiv.Helpers.HTML("<br><p>[ You have not watched any movies, follow the link below to browse available movies. ]</p>");
-                            
+
                             // Browse Movies Button
                             var BroweseBtn = ColContentDiv.Helpers.Button("Browse Movies", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                             {

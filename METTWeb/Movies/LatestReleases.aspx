@@ -85,7 +85,7 @@
                             }
                             var WatchBtn = MoviesWatchedDiv.Helpers.Button("Watch Now", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                             {
-                              WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Watch Trailer");
+                              WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Play Trailer");
                               WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "RentMovie($data)");
                               WatchBtn.AddClass("btn btn-primary btn-outline");
                             }
