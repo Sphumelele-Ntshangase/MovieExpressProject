@@ -106,14 +106,13 @@ namespace MEWeb.Account
       try
       {
         sr.Data = MELib.Movies.MovieList.GetMovieList().Where(a => a.ReleaseDate == ReleaseDate);
-        //sr.Data = MELib.Movies.MovieList.GetMovieList();
         sr.Success = true;
       }
       catch (Exception e)
       {
-        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovieTitle", $"(DateTime ReleaseDate, ({ReleaseDate})");
+        WebError.LogError(e, "Page: Home.aspx | Method: FilterByReleaseDate", $"(DateTime ReleaseDate, ({ReleaseDate})");
         sr.Data = e.InnerException;
-        sr.ErrorText = "Could not filter movies by category.";
+        sr.ErrorText = "Could not filter movies by released date.";
         sr.Success = false;
       }
       return sr;

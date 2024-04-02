@@ -119,9 +119,9 @@ namespace MEWeb.Movies
       }
       catch (Exception e)
       {
-        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovies", $"(int MovieGenreID, ({MovieGenreID})");
+        WebError.LogError(e, "Page: Movies.aspx | Method: FilterMovies", $"(int MovieGenreID, ({MovieGenreID})");
         sr.Data = e.InnerException;
-        sr.ErrorText = "Could not filter movies by category.";
+        sr.ErrorText = "Could not filter movies by genre.";
         sr.Success = false;
       }
       return sr;
@@ -138,9 +138,9 @@ namespace MEWeb.Movies
       }
       catch (Exception e)
       {
-        WebError.LogError(e, "Page: LatestReleases.aspx | Method: FilterMovieTitle", $"(string MovieTitle, ({MovieTitle})");
+        WebError.LogError(e, "Page: Movies.aspx | Method: FilterMovieTitle", $"(string MovieTitle, ({MovieTitle})");
         sr.Data = e.InnerException;
-        sr.ErrorText = "Could not filter movies by category.";
+        sr.ErrorText = "Could not filter movies by title.";
         sr.Success = false;
       }
       return sr;
