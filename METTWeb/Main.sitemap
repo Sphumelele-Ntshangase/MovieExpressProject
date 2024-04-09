@@ -14,7 +14,7 @@
       <siteMapNode title="Profile" roles="Account.Access" url="~/Profile/Profile.aspx" description="fa fa-user fa-lg fa-fw" ></siteMapNode>
       <siteMapNode title="Cart" roles="Account.Access" url="~/Profile/Transactions.aspx" description="fa fa-table fa-lg fa-fw" ></siteMapNode>
       <siteMapNode title="Funds" roles ="Account.Access" url="~/Profile/DepositFunds.aspx" description="fa fa-money fa-lg fa-fw"></siteMapNode>
-      <siteMapNode title="Orders" roles ="Account.Access" url="~/Profile/Orders.aspx" description="fa fa-file-o fa-lg fa-fw"></siteMapNode>
+      <!--<siteMapNode title="Orders" roles ="Account.Access" url="~/Profile/Orders.aspx" description="fa fa-file-o fa-lg fa-fw"></siteMapNode>-->
     </siteMapNode>
 
     <!--<siteMapNode title="Basic Examples" roles="About.Access" description="fa fa-file-o fa-lg fa-fw">
