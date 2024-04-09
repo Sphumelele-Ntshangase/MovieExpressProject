@@ -152,11 +152,11 @@
                     {
                       var RowContentDiv2 = CheckoutContentDiv.Helpers.DivC("row");
                       {
-                        var ResetBtn = RowContentDiv2.Helpers.Button("Reset Total", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                        {
-                          ResetBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "ClearTotal()");
-                          ResetBtn.AddClass("btn btn-primary btn-outline pull-left");
-                        }
+                        //var ResetBtn = RowContentDiv2.Helpers.Button("Reset Total", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                        //{
+                        //  ResetBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "ClearTotal()");
+                        //  ResetBtn.AddClass("btn btn-primary btn-outline pull-left");
+                        //}
                         var CheckoutBtn = RowContentDiv2.Helpers.Button("Go to Cart", Singular.Web.ButtonMainStyle.Primary, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                         {
                           CheckoutBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "Navigate()");
@@ -239,24 +239,6 @@
     var Wishlist = function () {
       MEHelpers.Notification("Movie successfully added to wishlist", 'center', 'success', 5000);
     };
-
-    //var WatchMovie = function (obj) {
-
-    //  MEHelpers.QuestionDialogYesNo("Are you sure you would like to watch this movie?", 'center',
-    //    function () { // Yes
-    //      ViewModel.CallServerMethod('WatchMovie', { MovieID: obj.MovieID(), ShowLoadingBar: true }, function (result) {
-    //        if (result.Success) {
-    //          MEHelpers.Notification("Item deleted successfully.", 'center', 'success', 5000);
-    //        }
-    //        else {
-    //          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-    //        }
-    //      })
-    //    },
-    //    function () { // No
-    //      window.location = "../Movies/Movies.aspx"; // or remove dialog
-    //    })
-    //};
 
     var ClearTotal = function () {// reset total to 0
       var totalPrice = 0;

@@ -125,10 +125,10 @@
                             //ColContentDiv.Helpers.HTML("<br><p>[ You have not watched any movies, follow the link below to browse available movies. ]</p>");
 
                             // Browse Movies Button
-                            var BroweseBtn = ColContentDiv.Helpers.Button("Browse Movies", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                            var BrowseBtn = ColContentDiv.Helpers.Button("New Movies", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                             {
-                              BroweseBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "BrowseMovies()");
-                              BroweseBtn.AddClass("btn btn-primary btn-outline pull-right");
+                              BrowseBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "BrowseMovies()");
+                              BrowseBtn.AddClass("btn btn-primary btn-outline pull-right");
                             }
                           }
                         }
@@ -237,7 +237,7 @@
     });
 
     var BrowseMovies = function () {
-      window.location = '../Movies/Movies.aspx';
+      window.location = '../Movies/LatestReleases.aspx';
     }
 
     var RentMovie = function (obj) {

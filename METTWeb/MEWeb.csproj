@@ -147,6 +147,7 @@
     <Content Include="Overview\Library.aspx" />
     <Content Include="Overview\CSLA.aspx" />
     <Content Include="Overview\Overview.aspx" />
+    <Content Include="Profile\Orders.aspx" />
     <Content Include="Profile\Profile.aspx" />
     <Content Include="Profile\DepositFunds.aspx" />
     <Content Include="Profile\Transactions.aspx" />
@@ -501,6 +502,13 @@
     </Compile>
     <Compile Include="Overview\Overview.aspx.designer.cs">
       <DependentUpon>Overview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile\Profile.aspx.cs">
       <DependentUpon>Profile.aspx</DependentUpon>

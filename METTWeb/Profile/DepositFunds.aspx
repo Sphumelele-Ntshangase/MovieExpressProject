@@ -24,7 +24,7 @@
             {
               PageTab.Style.ClearBoth();
               PageTab.AddClass("nav nav-tabs");
-              var ContainerTab = PageTab.AddTab("Deposits");
+              var ContainerTab = PageTab.AddTab("Deposits & Checkout");
               {
                 var RowContentDiv = ContainerTab.Helpers.DivC("row");
                 {
@@ -135,18 +135,18 @@
                         }                        
                         var LeftColContentDiv = CheckoutRow.Helpers.DivC("col-md-12");
                         {
-                          LeftColContentDiv.Helpers.HTML("<input type=\"radio\" id=\"collection\" name=\"option\" value=\"collect\">\r\n<label for=\"collect\">Collection</label>");
+                          LeftColContentDiv.Helpers.HTML("<input type=\"radio\" id=\"collection\" name=\"option\" value=\"collect\"><label for=\"collect\">Collection</label>");
                           var createEditor = LeftColContentDiv.Helpers.DivC("row");
                           {
                             var editorSize = createEditor.Helpers.DivC("col-md-6");
                             {
-                              editorSize.Helpers.HTML("<label for=\"start\">Choose date:</label>\n\n<input type=\"date\" id=\"start\" name=\"collect-date\" value=\"yyyy-mm-dd\" min=\"2024-04-01\" max=\"2024-12-31\" />");
+                              editorSize.Helpers.HTML("<label for=\"start\">Choose date:</label><br><input type=\"date\" id=\"start\" name=\"collect-date\" value=\"yyyy-mm-dd\" min=\"2024-04-01\" max=\"2024-12-31\" />");
                             }
                           }
                         }
                         var MidColContentDiv = CheckoutRow.Helpers.DivC("col-md-12 marginBottom20");
                         {
-                          LeftColContentDiv.Helpers.HTML("<br>\r\n<input type=\"radio\" id=\"delivery\" name=\"option\" value=\"deliver\">\r\n<label for=\"deliver\">Delivery</label>");
+                          LeftColContentDiv.Helpers.HTML("<br><input type=\"radio\" id=\"delivery\" name=\"option\" value=\"deliver\"><label for=\"deliver\">Delivery</label>");
                           //var first = MidColContentDiv.Helpers.Button("Enter Address", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                           //first.AddClass("btn btn-info btn-outline");
                           //first.AddBinding(Singular.Web.KnockoutBindingString.click, "EnterAddress($data)");
@@ -236,10 +236,9 @@
       ViewModel.UserAccount().TotalPurchased(totalPrice);
       var jsonBalance = ViewModel.UserAccount().Serialise();
 
-      ViewModel.CallServerMethod('AddToCart', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+      ViewModel.CallServerMethod('AddBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
         if (result.Success) {
           ViewModel.UserAccount.Set(result.Data);
-          
         }
         else {
           MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);

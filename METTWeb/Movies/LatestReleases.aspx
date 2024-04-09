@@ -91,6 +91,20 @@
                             }
                             MoviesWatchedDiv.Helpers.HTML("</div>");
                           }
+
+                          var ColContentDiv1 = RowContentDiv.Helpers.DivC("col-md-12");
+                          {
+                            //ColContentDiv.AddBinding(Singular.Web.KnockoutBindingString.visible, c => ViewModel.FoundUserMoviesInd == true);
+                            // Place Content Here
+                            //ColContentDiv.Helpers.HTML("<br><p>[ You have not watched any movies, follow the link below to browse available movies. ]</p>");
+
+                            // Browse Movies Button
+                            var BroweseBtn = ColContentDiv1.Helpers.Button("Find Movie", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                            {
+                              BroweseBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "FindMovies()");
+                              BroweseBtn.AddClass("btn btn-primary btn-outline pull-right");
+                            }
+                          }
                         }
                       }
                     }
@@ -148,6 +162,7 @@
                             }
 
                           }
+
                         }
                       }
                     }
@@ -191,18 +206,9 @@
       })
     };
 
-    //var FilterByReleaseDate = function (obj) {
-      
-    //  ViewModel.CallServerMethod('FilterByReleaseDate', { ReleaseDate: obj.ReleaseFromDate(), ShowLoadingBar: true }, function (result) {
-    //    if (result.Success) {
-    //      //MEHelpers.Notification("Movies filtered successfully.", 'center', 'info', 1000);
-    //      ViewModel.MovieList.Set(result.Data);
-    //    }
-    //    else {
-    //      MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-    //    }
-    //  })
-    //};
+    var FindMovies = function () {
+      window.location = '../Movies/Movies.aspx';
+    }
 
   </script>
 </asp:Content>
