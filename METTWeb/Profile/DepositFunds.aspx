@@ -132,7 +132,7 @@
                         var RowDiv = CheckoutRow.Helpers.DivC("col-md-12");
                         {
 
-                        }                        
+                        }
                         var LeftColContentDiv = CheckoutRow.Helpers.DivC("col-md-12");
                         {
                           LeftColContentDiv.Helpers.HTML("<input type=\"radio\" id=\"collection\" name=\"option\" value=\"collect\"><label for=\"collect\">Collection</label>");
@@ -170,7 +170,7 @@
                             AddFunds.AddBinding(Singular.Web.KnockoutBindingString.click, "CompleteOrder()");
                             AddFunds.AddClass("btn btn-primary btn-outline pull-right");
                           }
-                          
+
                         }
                       }
                     }
@@ -183,7 +183,81 @@
                   #endregion
                 }
               }
+              var TabHeading = PageTab.AddTab("Orders History");
+              {
+                var MainRow = TabHeading.Helpers.DivC("row margin0");
+                {
+                  var MainCol = MainRow.Helpers.DivC("col-md-12");
+                  {
+                    MainCol.Helpers.HTML("<p>Below, you will find movies you have ordered tickets for.</p>");
+                    MainCol.Helpers.HTML("<p></br></p>");
+                  }
+                }
+                // Create another row with columns
+                var FirstRow = TabHeading.Helpers.DivC("row margin0");
+                {
+                  var RowCol = FirstRow.Helpers.DivC("col-md-12");
+                  {
+                    var AnotherCardDiv = RowCol.Helpers.DivC("ibox float-e-margins paddingBottom");
+                    {
+                      var CardTitleDiv = AnotherCardDiv.Helpers.DivC("ibox-title");
+                      {
+                        CardTitleDiv.Helpers.HTML("<i class='ffa-lg fa-fw pull-left'></i>");
+                        CardTitleDiv.Helpers.HTML().Heading5("History");
+                      }
+                      var CardTitleToolsDiv = CardTitleDiv.Helpers.DivC("ibox-tools");
+                      {
+                        var aToolsTag = CardTitleToolsDiv.Helpers.HTMLTag("a");
+                        aToolsTag.AddClass("collapse-link");
+                        {
+                          var iToolsTag = aToolsTag.Helpers.HTMLTag("i");
+                          iToolsTag.AddClass("fa fa-chevron-up");
+                        }
+                      }
+                      var ContentDiv = AnotherCardDiv.Helpers.DivC("ibox-content");
+                      {
+                        var RowContentDiv = ContentDiv.Helpers.DivC("row");
+                        {
+
+                          // Show if Movies Watched USe Knockout Binding and Property on ViewModel
+                          var MovieColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
+                          {
+                            var UserMovieList = MovieColContentDiv.Helpers.BootstrapTableFor<MELib.Movies.UserMovie>((c) => c.UserMovieList, false, false, "");
+                            {
+                              var MovieListRow = UserMovieList.FirstRow;
+                              {
+                                var MovieTitle = MovieListRow.AddColumn("Title");
+                                {
+                                  var MovieTitleText = MovieTitle.Helpers.Span(c => c.MovieTitle);
+                                }
+                                var MovieGenre = MovieListRow.AddColumn("Price");
+                                {
+                                  var MovieGenreText = MovieGenre.Helpers.Span(c => c.Price);
+                                }
+                              }
+                              var MoviPaginationColContainer = MovieColContentDiv.Helpers.DivC("pagination-container");
+                              {
+                              }
+                            }
+                          }
+
+                          // Show If No Movies Watched
+                          var ColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
+                          {
+
+                          }
+                        }
+
+                      }
+                    }
+                  }
+                }
+              }
             }
+            //var ContainerTab1 = PageTab.AddTab("Orders");
+            //{
+
+            //}
           }
         }
       }
@@ -229,9 +303,9 @@
     var MasterCard = function () {
 
     }
-    
+
     var CompleteOrder = function () {
-    // reset total purchase to 0
+      // reset total purchase to 0
       var totalPrice = 0;
       ViewModel.UserAccount().TotalPurchased(totalPrice);
       var jsonBalance = ViewModel.UserAccount().Serialise();
@@ -245,7 +319,7 @@
         }
 
       });
-      
+
       if (confirm("Order Completed! Click Ok to go back home")) {
         window.location = window.location = '../Account/Home.aspx';
       }
