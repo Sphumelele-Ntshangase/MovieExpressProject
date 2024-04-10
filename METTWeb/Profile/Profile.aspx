@@ -4,6 +4,7 @@
   <!-- Add page specific styles and JavaScript classes below -->
   <link href="../Theme/Singular/Custom/home.css" rel="stylesheet" />
   <link href="../Theme/Singular/Custom/customstyles.css" rel="stylesheet" />
+  <link href="../Theme/Singular/METTCustomCss/Maintenance/users.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="PageTitleContent" runat="server">
@@ -100,8 +101,6 @@
                               var dialog = ChangeDetails.Helpers.Dialog(c => c.EditingUser != null, c => (c.EditingUser != null) ? "Edit Profile Details" : "Edit User", "CancelEdit");
                               {
                                 dialog.Style.Width = "600";
-                                //dialog.Style.PaddingAll("10");
-
                                 var dialogContent = dialog.Helpers.With<MELib.Security.User>(c => c.EditingUser);
                                 {
 
