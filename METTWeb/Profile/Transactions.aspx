@@ -158,6 +158,7 @@
     var Checkout = function () { // deduct the price when the user clicks the button
       if (ViewModel.UserAccount().TotalPurchased() <= ViewModel.UserAccount().Balance()) {
         var newBalance = ViewModel.UserAccount().Balance() - ViewModel.UserAccount().TotalPurchased(); // deduct price from the balance
+        newBalance = Number(newBalance.toFixed(2));
         ViewModel.UserAccount().Balance(newBalance); // set the account balance to the new one
         var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
 

@@ -26,7 +26,16 @@ namespace MEWeb.Profile
     public decimal Balance { get; set; }
     public string PostalAddress { get; set; }
     public Calendar Calendar { get; set; }
-   
+    public MELib.Security.User EditingUser { get; set; }
+    public string FullName { get; set; }
+    public int CardNo { get; set; }
+    public DateTime ExpiryDate { get; set; }
+    public int CardCode { get; set; }
+
+    public MELib.Movies.UserMovieList UserMovieList { get; set; }
+
+    public bool FoundUserMoviesInd { get; set; }
+
     public DepositFundsVM()
     {
 
@@ -36,6 +45,17 @@ namespace MEWeb.Profile
       base.Setup();
       
       UserAccount = UserAccountList.GetUserAccountList(identity.UserID).FirstOrDefault();
+
+      UserMovieList = MELib.Movies.UserMovieList.GetUserMovieList();
+
+      if (UserMovieList.Count() > 0)
+      {
+        FoundUserMoviesInd = true;
+      }
+      else
+      {
+        FoundUserMoviesInd = false;
+      }
     }
 
     [WebCallable]

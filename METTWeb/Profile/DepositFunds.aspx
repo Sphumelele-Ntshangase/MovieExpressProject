@@ -63,6 +63,7 @@
                         }
                         var LeftColContentDiv = AddingFunds.Helpers.DivC("col-md-12 marginBottom20");
                         {
+
                           //non-functional buttons for payment methods
                           LeftColContentDiv.Helpers.HTML("<p>Payment Method:</p>");
 
@@ -228,11 +229,11 @@
                               {
                                 var MovieTitle = MovieListRow.AddColumn("Title");
                                 {
-                                  var MovieTitleText = MovieTitle.Helpers.Span(c => c.MovieTitle);
+                                  //var MovieTitleText = MovieTitle.Helpers.Span(c => c.MovieTitle);
                                 }
                                 var MovieGenre = MovieListRow.AddColumn("Price");
                                 {
-                                  var MovieGenreText = MovieGenre.Helpers.Span(c => c.Price);
+                                  //var MovieGenreText = MovieGenre.Helpers.Span(c => c.Price);
                                 }
                               }
                               var MoviPaginationColContainer = MovieColContentDiv.Helpers.DivC("pagination-container");
@@ -273,6 +274,7 @@
     var AddBalance = function (inputElement) {
       if (ViewModel.Balance() > 0) {
         var newBalance = ViewModel.UserAccount().Balance() + inputElement.Balance(); // add entered amount to the balance
+        newBalance = Number(newBalance.toFixed(2));
         ViewModel.UserAccount().Balance(newBalance); // set the account balance to the new one
         var jsonBalance = ViewModel.UserAccount().Serialise(); // change to json format
 

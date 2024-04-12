@@ -318,6 +318,10 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\Order.cs" />
+    <Compile Include="Account\OrderList.cs" />
+    <Compile Include="Account\ROOrder.cs" />
+    <Compile Include="Account\ROOrderList.cs" />
     <Compile Include="Controls\BreadcrumbV2.cs" />
     <Compile Include="Controls\CustomControls.cs" />
     <Compile Include="Controls\FactorEditor.cs">
