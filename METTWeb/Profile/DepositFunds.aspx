@@ -241,7 +241,6 @@
                               }
                             }
                           }
-
                           // Show If No Movies Watched
                           var ColContentDiv = RowContentDiv.Helpers.DivC("col-md-12");
                           {
@@ -255,10 +254,6 @@
                 }
               }
             }
-            //var ContainerTab1 = PageTab.AddTab("Orders");
-            //{
-
-            //}
           }
         }
       }
@@ -308,19 +303,19 @@
 
     var CompleteOrder = function () {
       // reset total purchase to 0
-      var totalPrice = 0;
-      ViewModel.UserAccount().TotalPurchased(totalPrice);
-      var jsonBalance = ViewModel.UserAccount().Serialise();
+      //var totalPrice = 0;
+      //ViewModel.UserAccount().TotalPurchased(totalPrice);
+      //var jsonBalance = ViewModel.UserAccount().Serialise();
 
-      ViewModel.CallServerMethod('AddBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
-        if (result.Success) {
-          ViewModel.UserAccount.Set(result.Data);
-        }
-        else {
-          MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
-        }
+      //ViewModel.CallServerMethod('AddBalance', { Account: jsonBalance, ShowLoadingBar: true }, function (result) {
+      //  if (result.Success) {
+      //    ViewModel.UserAccount.Set(result.Data);
+      //  }
+      //  else {
+      //    MEHelpers.Notification(result.ErrorText, 'center', 'warning', 5000);
+      //  }
 
-      });
+      //});
 
       if (confirm("Order Completed! Click Ok to go back home")) {
         window.location = window.location = '../Account/Home.aspx';

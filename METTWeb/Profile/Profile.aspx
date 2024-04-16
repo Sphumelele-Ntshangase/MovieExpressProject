@@ -155,7 +155,7 @@
                                     {
                                       emailAddressEditor.AddClass("form-control");
                                     }
-                                  }                                  
+                                  }
                                 }
 
                                 dialog.AddConfirmationButtons("Save", "SaveUser()", "Cancel");
@@ -164,13 +164,13 @@
 
                             var EditDetailsButton = MidColContentDiv.Helpers.DivC("row");
                             {
-                              if (Singular.Security.Security.HasAccess("Security.Manage Users"))
-                              {
+                              //if (Singular.Security.Security.HasAccess("Security.Manage Users"))
+                              //{
                               // Change Details Button
                               var ChangeDetailsBtn = ChangeDetails.Helpers.Button("Edit Details", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
                               ChangeDetailsBtn.AddClass("btn btn-primary btn-outline pull-right");
                               ChangeDetailsBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "EditUser($data)");
-                              }
+                              //}
                             }
                           }
                         }

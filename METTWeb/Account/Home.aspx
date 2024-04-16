@@ -104,12 +104,12 @@
                                 MoviesWatchedDiv.Helpers.HTML("<b><span data-bind=\"text: $data.MovieTitle() \"  class='caption'></span></b>");
 
                               }
-                              //var WatchBtn = MoviesWatchedDiv.Helpers.Button("", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
-                              //{
-                              //  WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Watch Movie");
-                              //  WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "RentMovie($data)");
-                              //  WatchBtn.AddClass("btn btn-primary btn-outline margin-top-10");
-                              //}
+                              var WatchBtn = MoviesWatchedDiv.Helpers.Button("", Singular.Web.ButtonMainStyle.NoStyle, Singular.Web.ButtonSize.Normal, Singular.Web.FontAwesomeIcon.None);
+                              {
+                                WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.text, c => "Play Trailer");
+                                WatchBtn.AddBinding(Singular.Web.KnockoutBindingString.click, "RentMovie($data)");
+                                WatchBtn.AddClass("btn btn-primary btn-outline margin-top-10");
+                              }
                               MoviesWatchedDiv.Helpers.HTML("</div>");
                             }
                             var MoviPaginationColContainer = MovieColContentDiv.Helpers.DivC("pagination-container");
